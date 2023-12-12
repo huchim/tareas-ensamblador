@@ -162,17 +162,48 @@ Los registradores generales se describen en la página #24 del libro, estos pued
 - Instruction Pointer Register (Página #26, 2.3.1.4)
   - rip (next instruction to be executed)
 - Flag Register  (Página #26, 2.3.1.5)
-  - 
+  -  ?
 
 Ver
 
 - https://www.cs.virginia.edu/~evans/cs216/guides/x86-registers.png
 - https://ikrima.dev/dev-notes/assembly/asm-cheatsheet/
 
-## Multiplicación
+### Definir constantes
 
-```bash
-cd 1_multiplicacion
-make
-./tarea.out
+Las constantes son definidas utilizando el operador `equ` (página #48, 4.3)
+
+```assembly
+LF             equ    10  ; Salto de línea
+NULL           equ     0  ; Fin del texto.
+EXIT_SUCCESS   equ     0  ; Código de salida con éxito.
+SYS_exit       equ    60  ; Llamada al sistema para terminar.
+```
+
+### Definir variables
+
+#### Definir variables de texto
+
+>  Deben de ir antes que las demás variables.
+
+American Standard Code for Information Interchange (ASCII)
+
+Los carácteres son representados númericamente, donde cada carácter tiene asignado un número, de acuerdo a la tabla ASCIII.
+
+Como en el ejemplo, cada cáracter es almacenado en 8-bits que soporta correctamente la tabla de carácteres ASCIII, sin embargo no es lo adecuado cuando se usan otros carácteres usados en otros idiomas como 专 (0x4E10), para ello es necesario utilizar Unicode (este archivo es UTF-8, soporta los carácteres Unicode). Aunque en este tema no es importante saberlo, esto es útil cuando en algunos documentos vemos carácteres extraños (`?, ◆`) que usualmente es provocado porque no se especifica correctamente la tabla de carácteres.
+
+Otro datos importante (página #43, 3.4.2) es que para marcar como finalizado una cadena de texto se usa el carácter `NULL` que es igual a 0, como este carácter no se puede imprimir se usa para marcar el fin del texto.
+
+```
+Ejemplo:         A (caràcter)
+                65 (decimal)
+         0100 0001 (binario)
+            4    1
+              0x41 (héxadecimal)
+```
+
+Código:
+
+```assembly
+resultado_msg db "El resultado es: %d", 10, 0
 ```
