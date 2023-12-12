@@ -121,6 +121,53 @@ foo ddq 5,000,000,000,000,000,0000
 
 Referencia: https://flint.cs.yale.edu/cs421/papers/x86-asm/asm.html
 
+### Punto flotante
+
+Es importante mencionar que un número entero puede ser representado usando todas los bits disponibles, sin embargo en el caso de los números flotantes (con decimal) se debe considerar el signo, la parte entera y la parte decimal. En el formato IEEE-754 se puede representar:
+
+```
+                                                                                        -2.2
+                                                                   -2.2000000476837158203125
+      0000 0000 0000 0000 0000 0000 0000 0000 [1] [1000 0000] [0001 1001 1001 1001 1001 101]
+```
+Ver:
+
+- https://www.h-schmidt.net/FloatConverter/IEEE754.html
+- http://www.cs.put.poznan.pl/tzok/public/cawllp-04-asm.html
+
+### Registradores
+
+Este es un registrador EAX de 32 bits, y su disposición (layout) es la siguiente:
+
+```
+Este es un registrador EAX de 32 bits, y su disposición (layout) es la siguiente:
+ ________________ ________ ____ ____
+|      EAX       |   AX   | AH | AL |
+|________________|________|____|____|
+ \_________________________________/
+          |       \________________/
+      32 bits              |    \__/
+                       16 bits   ||
+                               8 bits
+```
+
+Es importante mencionar que en el libro, dice que EAX se ve afectado por el valor de AX, y AX de AH, es decir, que cuando el valor de AX cambia, el valor de EAX también cambia, ya que en realidad EAX es el resultado del valor de todos los registradores.
+
+Los registradores generales se describen en la página #24 del libro, estos pueden servir para almenacer datos, pero hay hay otros con un rol espécifico:
+
+- Stack Pointer Register (Página #26, 2.3.1.2)
+  - rsp
+- Base Pointer Register (Página #26, 2.3.1.3)
+  - rbp
+- Instruction Pointer Register (Página #26, 2.3.1.4)
+  - rip (next instruction to be executed)
+- Flag Register  (Página #26, 2.3.1.5)
+  - 
+
+Ver
+
+- https://www.cs.virginia.edu/~evans/cs216/guides/x86-registers.png
+- https://ikrima.dev/dev-notes/assembly/asm-cheatsheet/
 
 ## Multiplicación
 
