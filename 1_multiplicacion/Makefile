@@ -1,8 +1,16 @@
 .POSIX:
 
+UNAME := $(shell uname)
+
+ifeq ($(UNAME), Linux)
+OUT_EXT ?= .out
+endif
+ifeq ($(UNAME), Windows_NT)
+OUT_EXT ?= .exe
+endif
+
 IN_EXT ?= .asm
 INC_EXT ?= .inc
-OUT_EXT ?= .out
 TMP_EXT ?= .o
 RUN ?= main
 
