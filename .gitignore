@@ -1,3 +1,6 @@
 *.o
+*.obj
 *.out
 *.exe
+*.lst
+exe

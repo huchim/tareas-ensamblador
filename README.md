@@ -2,27 +2,16 @@
 
 ## Herramientas
 
-### NASM
+### Linux
 
-[NASM](https://www.nasm.us/) es el ensamblador necesario para crear el archivo "objetO".
+Instalar las siguientes herramientas.
 
-- Descargar para Windows: [NASM v2.16.01](https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/)
+- nasm
+- gcc
+- ddd
+- make
 
-### GCC
-
-GCC es el compilador que utilizaremos para crear el archivo ejecutable.
-
-En la página de [GCC](https://gcc.gnu.org/install/binaries.html) se pueden encontrar diversas formas de instalarlos en varios sistemas operativos, por ejemplo [Cygwin](https://sourceware.org/cygwin/) en Windows.
-
-En esta página se puede encontrar más información para poder instalarlo:
-
-https://stackoverflow.com/questions/47215330/how-do-i-install-gcc-on-cygwin
-
-### MAKE
-
-Make es opcional, se instala con el mismo instalador de CYGWIN, y es usado para facilitar los pasos de la compilación.
-
-### Compilar
+#### Compilar
 
 Todos las carpetas son una tarea. Cambiar al directorio y ejecutar los siguientes comandos:
 
@@ -31,7 +20,45 @@ nasm -w+all -f elf64 -o 'tarea.o' 'tarea.asm'
 gcc -fno-pie -m64 -no-pie -pedantic-errors -o 'tarea.out' 'tarea.o'
 ```
 
+### Windows
+
+#### Instalación del ensamblador NASM
+
+- Instalar [NASM v2.16.01](https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/) como administrador.
+- Localizar la carpeta donde se instaló: `C:\Program Files\NASM\`
+- Agregar la carpeta a la variable de entorno `PATH`.
+  - [Como agregar variables de entorno (S. O. Windows 10)](https://medium.com/@01luisrene/como-agregar-variables-de-entorno-s-o-windows-10-e7f38851f11f)
+  - [Variables de Entorno Windows 11 | Comandos](https://www.solvetic.com/tutoriales/article/12395-variables-de-entorno-windows-11-comandos/)
+
+#### Instalación del enlazador GoLink
+
+- Descargar [GoLink v1.0.4.5](https://www.godevtool.com/Golink.zip)
+- Descomprimir el contenido en la carpeta: `C:\golink`
+- Agregar la carpeta a la variable de entorno `PATH`.
+  - [Como agregar variables de entorno (S. O. Windows 10)](https://medium.com/@01luisrene/como-agregar-variables-de-entorno-s-o-windows-10-e7f38851f11f)
+  - [Variables de Entorno Windows 11 | Comandos](https://www.solvetic.com/tutoriales/article/12395-variables-de-entorno-windows-11-comandos/)
+
+#### Compilar
+
+Todos las carpetas son una tarea. Cambiar al directorio y ejecutar los siguientes comandos:
+
+```bash
+nasm  -w+all -g -f win64 -l 'tarea.lst' -o 'tarea.obj' 'tarea.asm'
+goasm -f win64 -o 'tarea.obj' 'tarea.asm'
+golink tarea.obj /console kernel32.dll user32.dll msvcrt.dll /debug dbg /entry main /fo tarea.exe
+```
+
 Si se ha instalado el programa `make`, solo corresponde ejecutar `make`.
+
+#### Depurar
+
+https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/
+
+[Descargar WinDbg](https://aka.ms/windbg/download)
+
+```
+%LOCALAPPDATA%\Microsoft\WindowsApps\WinDbgX.exe -o tarea.exe
+```
 
 ## Documentación
 

@@ -23,10 +23,12 @@ main:
     mul byte [bNumB]
     mov word [qAns1], ax
 
-    mov rdi, resultado_msg
-    mov rsi, [qAns1]
+    mov rdi, resultado_msg; (register destination index, 64-bit)
+                          ; Also used to pass function argument #2 in 64-bit Linux
+    mov rsi, [qAns1] ; (register source index, 64-bit)
+                     ; Function argument #1 in 64-bit Linux
     mov al, 0
-    call printf
+    call printf; printf(rdi, rsi)
 
 last:
     mov rax, SYS_exit

@@ -26,7 +26,7 @@ all: $(OUTS)
 	gcc -fno-pie -m64 -no-pie -pedantic-errors -o '$@' '$<'
 
 %$(TMP_EXT): %$(IN_EXT) $(INCS)
-	nasm -w+all -f elf64 -o '$@' '$<'
+	nasm -w+all -f win64 -o '$@' '$<'
 
 clean:
 	rm -f *$(TMP_EXT) *$(OUT_EXT)
